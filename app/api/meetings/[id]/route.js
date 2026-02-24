@@ -1,6 +1,6 @@
 // app/api/meetings/[id]/route.js
 import { NextResponse } from 'next/server';
-import { db } from '@/firebase/config';
+import { db } from '@/app/lib/firebase';
 import { doc, getDoc, updateDoc, deleteDoc, Timestamp } from 'firebase/firestore';
 import zoomService from '@/app/lib/zoomService';
 
