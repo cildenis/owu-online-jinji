@@ -4,8 +4,6 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 
-export const dynamic = 'force-dynamic';
-
 // PDF.js worker configuration
 if (typeof window === 'undefined') {
   // Server-side
