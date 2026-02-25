@@ -183,9 +183,7 @@ export async function getTotalMeetingsCount() {
   }
 }
 
-export async function GET(req) {
-  const { db } = await import("@/lib/firebase");
-}
+
 // Bugünkü会議sayısını getir (Optimized with Query)
 export async function getTodayMeetings() {
   try {
