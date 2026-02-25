@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+export const dynamic = 'force-dynamic';
+
 // Initialize Resend
 // Note: In production, use process.env.RESEND_API_KEY. 
 // If specific client-side key needed, verify env names.

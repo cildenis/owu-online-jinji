@@ -4,12 +4,12 @@ import { db } from '@/app/lib/firebase';
 import { doc, getDoc, updateDoc, deleteDoc, Timestamp } from 'firebase/firestore';
 import zoomService from '@/app/lib/zoomService';
 
-export const dynamic = 'force-dynamic'; // ✅ Build hatasını çözer
+export const dynamic = 'force-dynamic'; 
 
 // 会議詳細を取得
 export async function GET(request, { params }) {
   try {
-    const { id } = await params; // ✅ Next.js 15+ için await eklendi
+    const { id } = await params; 
     const meetingDoc = await getDoc(doc(db, 'meetings', id));
 
     if (!meetingDoc.exists()) {
@@ -42,7 +42,7 @@ export async function GET(request, { params }) {
 // 会議を更新
 export async function PATCH(request, { params }) {
   try {
-    const { id } = await params; // ✅ await eklendi
+    const { id } = await params; 
     const body = await request.json();
     const { title, description, scheduledAt, duration, status } = body;
 
@@ -93,7 +93,7 @@ export async function PATCH(request, { params }) {
 // 会議を削除
 export async function DELETE(request, { params }) {
   try {
-    const { id } = await params; // ✅ await eklendi
+    const { id } = await params; 
     
     const meetingDoc = await getDoc(doc(db, 'meetings', id));
     if (!meetingDoc.exists()) {
