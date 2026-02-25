@@ -1,12 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+export const dynamic = 'force-dynamic'; // ✅ Build hatasını çözer
 
-
-// Initialize Resend
-// Note: In production, use process.env.RESEND_API_KEY. 
-// If specific client-side key needed, verify env names.
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY || process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY); // ✅ Sadece server-side key
 
 export async function POST(request) {
     try {
@@ -51,7 +48,7 @@ export async function POST(request) {
               つきましては、下記ボタンよりご都合の良い日時をご予約ください。
             </p>
 
-             <div style="text-align: center; margin: 30px 0;">
+            <div style="text-align: center; margin: 30px 0;">
               <a href="https://calendly.com/" style="background-color: #059669; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block;">
                 面接を予約する
               </a>
@@ -71,7 +68,6 @@ export async function POST(request) {
 
         if (error) {
             console.error('Email send error:', error);
-            // Don't fail the whole request just because email failed, but log it
             return NextResponse.json(
                 { success: false, error: error.message },
                 { status: 500 }
