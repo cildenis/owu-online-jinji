@@ -1,12 +1,18 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-export const dynamic = 'force-dynamic'; 
+export const dynamic = 'force-dynamic';
 
-const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY); 
+
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) throw new Error('RESEND_API_KEY is not defined');
+  return new Resend(apiKey);
+}
 
 export async function POST(request) {
     try {
+        const resend = getResendClient(); 
         const { applicantName, applicantEmail, jobTitle, score } = await request.json();
 
         if (!applicantEmail) {
