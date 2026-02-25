@@ -65,6 +65,7 @@ export async function PATCH(request, { params }) {
       await zoomService.updateMeeting(meetingData.zoomMeetingId, zoomUpdates);
     }
 
+    
     // Firestoreで更新
     const updates = {
       ...(title && { title }),
