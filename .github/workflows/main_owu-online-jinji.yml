@@ -23,7 +23,7 @@ jobs:
           npm run build --if-present
           npm run test --if-present
         env:                                                                    # ✅ Eklendi
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}                        # ✅
+          NEXT_PUBLIC_RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}                        # ✅
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}          # ✅
           NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}  # ✅
           NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}    # ✅
@@ -62,3 +62,4 @@ jobs:
           app-name: 'owu-online-jinji'
           slot-name: 'Production'
           package: .
+
