@@ -4,7 +4,7 @@ import { db } from '@/app/lib/firebase';
 import { collection, addDoc, getDocs, query, where, Timestamp, orderBy } from 'firebase/firestore';
 import zoomService from '@/app/lib/zoomService';
 
-export const dynamic = 'force-dynamic'; // ✅ Build hatasını çözer
+export const dynamic = 'force-dynamic'; 
 
 // 会議を作成
 export async function POST(request) {
