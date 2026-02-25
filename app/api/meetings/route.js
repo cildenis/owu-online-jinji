@@ -4,6 +4,8 @@ import { db } from '@/app/lib/firebase';
 import { collection, addDoc, getDocs, query, where, Timestamp, orderBy } from 'firebase/firestore';
 import zoomService from '@/app/lib/zoomService';
 
+export const dynamic = 'force-dynamic'; // ✅ Build hatasını çözer
+
 // 会議を作成
 export async function POST(request) {
     try {
@@ -18,7 +20,6 @@ export async function POST(request) {
             password,
         } = body;
 
-        // バリデーション
         if (!title || !scheduledAt || !duration || !organizerId) {
             return NextResponse.json(
                 { success: false, error: '必須項目が入力されていません' },
@@ -26,7 +27,6 @@ export async function POST(request) {
             );
         }
 
-        // Zoom会議を作成
         const zoomResult = await zoomService.createMeeting({
             topic: title,
             agenda: description,
@@ -35,7 +35,6 @@ export async function POST(request) {
             password: password,
         });
 
-        // Firestoreに保存
         const meetingRef = await addDoc(collection(db, 'meetings'), {
             title,
             description: description || '',
@@ -47,7 +46,7 @@ export async function POST(request) {
             meetingUrl: zoomResult.meetingUrl,
             hostUrl: zoomResult.hostUrl,
             password: zoomResult.password || '',
-            status: 'scheduled', // scheduled, ongoing, completed, cancelled
+            status: 'scheduled',
             createdAt: Timestamp.now(),
             updatedAt: Timestamp.now(),
         });
@@ -112,7 +111,6 @@ export async function GET(request) {
             });
         });
 
-        // ステータスでフィルタ
         let filteredMeetings = meetings;
         if (status) {
             filteredMeetings = meetings.filter(m => m.status === status);
